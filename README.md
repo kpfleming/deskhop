@@ -1,4 +1,5 @@
 #  DeskHop - Fast Desktop Switching
+## JLCPCB version (see below)
 
 Did you ever notice how, in the crazy world of tech, there's always that one quirky little project trying to solve a problem so niche that its only competitors might be a left-handed screwdriver and a self-hiding alarm clock?
 
@@ -133,18 +134,23 @@ The lid is of a snap-fit design, with a screwdriver slot for opening. The markin
 
 ## Bill of materials
 
-| Component          | Qty | Unit Price / € | Price / €|
-|--------------------|-----|----------------|----------|
-| Raspberry Pi Pico  | 2   | 4.10           | 8.20     |
-| ADuM1201BRZ        | 1   | 2.59           | 2.59     |
-| Cap 1206 SMD 100nF | 2   | 0.09           | 0.18     |
-| USB-A PCB conn.    | 2   | 0.20           | 0.40     |
-| Headers 2.54 1x03  | 2   | 0.08           | 0.16     |
-|                    |     |                |          |
-|                    |     |          Total | 11.53    |
+Note that this fork of the project has been converted to use parts
+from [LCSC](https://www.lcsc.com/), specifically parts that are kept
+in stock at JLCPCB. This reduces costs and shortens assembly times,
+but is only useful if you plan on ordering fully-assembled boards from
+JLCPCB.
 
-USB-A connector can be Molex MX-67643-0910 or a cheaper/budget one that shares the same dimensions.
-TI ISO7721DR can be used instead of the ADuM - it's pin-compatible, much cheaper and with better specs.
+Prices quoted below are from a qty 10 unit order on 2024-02-26.
+
+| Component          | Qty | LCSC SKU | Unit Price / $ | Price / $|
+|--------------------|-----|----------|----------------|----------|
+| Raspberry Pi Pico  | 2   | C7203002 | 5.93           | 11.85    |
+| ISO7721DRRZ        | 1   | C366164  | 0.56           |  0.56    |
+| Cap 1206 SMD 100nF | 2   | C2858367 | 0.013          |  0.03    |
+| USB-A PCB conn.    | 2   | C42411   | 0.049          |  0.10    |
+| Headers 2.54 1x03  | 2   | C2915006 | 0.176          |  0.35    |
+|                    |     |          |                |          |
+|                    |     |          |          Total | 12.89    |
 
 Additional steps:
 

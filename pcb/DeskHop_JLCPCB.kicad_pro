@@ -177,6 +177,7 @@
       ],
       "track_widths": [
         0.0,
+        0.5,
         1.0
       ],
       "via_dimensions": [
@@ -411,7 +412,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "DeskHop.kicad_pro",
+    "filename": "DeskHop_JLCPCB.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -419,9 +420,9 @@
       {
         "bus_width": 12,
         "clearance": 0.2,
-        "diff_pair_gap": 0.25,
+        "diff_pair_gap": 0.2,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
+        "diff_pair_width": 0.5,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -486,7 +487,7 @@
       "workbook_filename": ""
     },
     "page_layout_descr_file": "",
-    "plot_directory": "",
+    "plot_directory": "../schematics/",
     "spice_adjust_passive_values": false,
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",

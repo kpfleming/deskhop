@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "LCSC_C42411")(type "KiCad")(uri "${KIPRJMOD}/libs/LCSC_C42411.pretty")(options "")(descr ""))
+)
