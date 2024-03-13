@@ -34,7 +34,7 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.0,
+          "drill": 2.7,
           "height": 5.4,
           "width": 5.4
         },
@@ -177,6 +177,9 @@
       ],
       "track_widths": [
         0.0,
+        0.15,
+        0.2,
+        0.4,
         0.5,
         1.0
       ],
@@ -397,10 +400,10 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
-      "simulation_model_issue": "error",
+      "simulation_model_issue": "ignore",
       "unannotated": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
@@ -412,7 +415,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "DeskHop_JLCPCB.kicad_pro",
+    "filename": "DeskHop-C-JLCPCB.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -430,8 +433,8 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.5,
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
         "wire_width": 6
       }
     ],
@@ -501,6 +504,14 @@
     [
       "fa1c3e0e-91b1-4532-8b22-6d396d71c75b",
       ""
+    ],
+    [
+      "f9f1b756-2837-49ba-9cd6-6a0304ce3710",
+      "Core Left (B)"
+    ],
+    [
+      "62cc2993-706a-4cbe-b6be-0f16bab4a3f0",
+      "Core Right (A)"
     ]
   ],
   "text_variables": {}
