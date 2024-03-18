@@ -38,7 +38,7 @@
   (pad "B7" smd rect (at -0.75 -2.4) (size 0.3 1.24) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp deb3ac0b-4df0-4f17-9df4-a10c85e5cbb7))
   (pad "B8" smd rect (at -1.75 -2.4) (size 0.3 1.24) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp c533110f-b66f-4c17-a6a7-18c6f8d53ab7))
   (model "/home/kpfleming/git-personal/deskhop/pcb/libs/LCSC_C2988369.3dshapes/USB-C-SMD_G-SWITCH_GT-USB-7010ASV.wrl"
-    (offset (xyz 0 -1.05 1.5))
+    (offset (xyz 0 -1.05 0))
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 0))
   )
