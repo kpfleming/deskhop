@@ -12,7 +12,7 @@
     (property "Datasheet" "https://lcsc.com/product-detail/FLASH_W25Q16JVSSIQ_C82317.html" (at 0 -13.97 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC Part" "C82317" (at 0 -16.51 0)
+    (property "LCSC" "C82317" (at 0 -16.51 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (symbol "W25Q16JVSSIQ_0_1"

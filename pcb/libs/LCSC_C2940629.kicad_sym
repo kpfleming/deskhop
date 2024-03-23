@@ -12,7 +12,7 @@
     (property "Datasheet" "" (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC Part" "C2940629" (at 0 -15.24 0)
+    (property "LCSC" "C2940629" (at 0 -15.24 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (symbol "DMG2305UX_0_1"

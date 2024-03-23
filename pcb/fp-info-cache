@@ -1,4 +1,4 @@
-23052096872020143
+23052096980871369
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -62236,13 +62236,6 @@ SOIC-8_L5.3-W5.3-P1.27-LS8.0-BL
 0
 8
 8
-LCSC_C86487
-KEY-SMD_4P-L6.0-W6.0-P4.50
-
-
-0
-4
-4
 LCSC_C347376
 SOT-23-3_L3.0-W1.7-P0.95-LS2.9-BR
 
@@ -62259,6 +62252,13 @@ SOIC-8_L5.0-W4.0-P1.27-LS6.0-BL
 8
 LCSC_C387348
 OSC-SMD_4P-L3.2-W2.5-BL-1
+
+
+0
+4
+4
+LCSC_C470427
+KEY-SMD_4P-L4.2-W3.2-P2.20-LS4.6
 
 
 0
@@ -62283,7 +62283,7 @@ USB-C-SMD_G-SWITCH_GT-USB-7010ASV
 
 
 0
-18
+16
 16
 LED_SMD
 LED-APA102-2020

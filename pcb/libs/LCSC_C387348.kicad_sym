@@ -12,7 +12,7 @@
     (property "Datasheet" "https://lcsc.com/product-detail/New-Arrivals_Shenzhen-SCTF-Elec-S3D12-000000B20F30T_C387348.html" (at 0 -12.7 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC Part" "C387348" (at 0 -15.24 0)
+    (property "LCSC" "C387348" (at 0 -15.24 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (symbol "S3D12.000000B20F30T_0_1"

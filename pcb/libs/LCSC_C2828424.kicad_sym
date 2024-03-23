@@ -12,7 +12,7 @@
     (property "Datasheet" "" (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC Part" "C2828424" (at 0 -10.16 0)
+    (property "LCSC" "C2828424" (at 0 -10.16 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (symbol "1N5817WSSJ_0_1"
