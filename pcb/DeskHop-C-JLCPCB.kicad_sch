@@ -6,7 +6,7 @@
 
   (title_block
     (title "DeskHop-C - Fast K/M Switching Device (JLCPCB build)")
-    (date "2024-03-17")
+    (date "2024-03-22")
     (rev "v1-jlcpcb")
     (company "Hrvoje Čavrak and Kevin P. Fleming")
     (comment 1 "License: GPL-3.0-only")
