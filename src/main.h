@@ -24,9 +24,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "config.h"
 #include "hid_parser.h"
-#include "pio_usb.h"
-#include "tusb.h"
+#include <pio_usb.h>
+#include <tusb.h>
 #include "usb_descriptors.h"
 #include "user_config.h"
 #include <hardware/flash.h>
@@ -41,9 +42,6 @@
 #define PICO_A 0
 #define PICO_B 1
 
-#define OUTPUT_A 0
-#define OUTPUT_B 1
-
 #define ENABLE  1
 #define DISABLE 0
 
@@ -53,7 +51,6 @@
 #define MAX_REPORT_ITEMS      16
 #define MOUSE_BOOT_REPORT_LEN 4
 
-#define NUM_SCREENS               2 // Will be more in the future
 #define MOUSE_ZOOM_SCALING_FACTOR 2
 
 #define ARRAY_SIZE(arr)                (sizeof(arr) / sizeof((arr)[0]))
@@ -146,74 +143,9 @@ typedef struct {
 #define KBD_REPORT_LENGTH   8
 #define MOUSE_REPORT_LENGTH 7
 
-/*********  Screen  **********/
-#define MIN_SCREEN_COORD 0
-#define MAX_SCREEN_COORD 32767
-#define SCREEN_MIDPOINT 16384
-
 /*********  Configuration storage definitions  **********/
 
-#define CURRENT_CONFIG_VERSION 4
-
-enum os_type_e {
-    LINUX   = 1,
-    MACOS   = 2,
-    WINDOWS = 3,
-    OTHER   = 255,
-};
-
-enum screen_pos_e {
-    LEFT   = 1,
-    RIGHT  = 2,
-    MIDDLE = 3,
-};
-
-enum itf_num_e {
-    ITF_NUM_HID       = 0,
-    ITF_NUM_HID_REL_M = 1,
-};
-
-typedef struct {
-    int top;    // When jumping from a smaller to a bigger screen, go to THIS top height
-    int bottom; // When jumping from a smaller to a bigger screen, go to THIS bottom
-                // height
-} border_size_t;
-
-/* Define screensaver parameters */
-typedef struct {
-    uint8_t enabled;
-    uint8_t only_if_inactive;
-    uint64_t idle_time_us;
-    uint64_t max_time_us;
-} screensaver_t;
-
-/* Define output parameters */
-typedef struct {
-    int number;                // Number of this output (e.g. OUTPUT_A = 0 etc)
-    int screen_count;          // How many monitors per output (e.g. Output A is Windows with 3 monitors)
-    int screen_index;          // Current active screen
-    int speed_x;               // Mouse speed per output, in direction X
-    int speed_y;               // Mouse speed per output, in direction Y
-    border_size_t border;      // Screen border size/offset to keep cursor at same height when switching
-    enum os_type_e os;         // Operating system on this output
-    enum screen_pos_e pos;     // Screen position on this output
-    screensaver_t screensaver; // Screensaver parameters for this output
-} output_t;
-
-/* Data structure defining how configuration is stored */
-typedef struct {
-    uint32_t magic_header;
-    uint32_t version;
-    uint8_t force_mouse_boot_mode;
-    output_t output[NUM_SCREENS];
-    uint8_t screensaver_enabled;
-    // Keep checksum at the end of the struct
-    uint32_t checksum;
-} config_t;
-
-extern const config_t default_config;
-
-extern config_t ADDR_CONFIG[];
+extern config_storage_t ADDR_CONFIG[];
 #define ADDR_CONFIG_BASE_ADDR (ADDR_CONFIG)
 
 // -------------------------------------------------------+
@@ -234,6 +166,8 @@ typedef struct {
     bool acknowledge;                // True if we are to notify the user about registering keypress
 } hotkey_combo_t;
 
+extern hotkey_combo_t hotkeys[];
+
 typedef struct TU_ATTR_PACKED {
     uint8_t buttons;
     int16_t x;
@@ -248,8 +182,8 @@ typedef struct {
     uint8_t kbd_dev_addr; // Address of the keyboard device
     uint8_t kbd_instance; // Keyboard instance (d'uh - isn't this a useless comment)
 
-    uint8_t keyboard_leds[NUM_SCREENS];  // State of keyboard LEDs (index 0 = A, index 1 = B)
-    uint64_t last_activity[NUM_SCREENS]; // Timestamp of the last input activity (-||-)
+    uint8_t keyboard_leds[NUM_OUTPUTS];  // State of keyboard LEDs (index 0 = A, index 1 = B)
+    uint64_t last_activity[NUM_OUTPUTS]; // Timestamp of the last input activity (-||-)
     receiver_state_t receiver_state;     // Storing the state for the simple receiver state machine
     uint64_t core1_last_loop_pass;       // Timestamp of last core1 loop execution
     uint8_t active_output;               // Currently selected output (0 = A, 1 = B)

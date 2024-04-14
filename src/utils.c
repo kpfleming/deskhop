@@ -63,39 +63,42 @@ void wipe_config(void) {
 }
 
 void load_config(device_t *state) {
-    const config_t *config   = ADDR_CONFIG_BASE_ADDR;
-    config_t *running_config = &state->config;
+    const config_storage_t *storage = ADDR_CONFIG_BASE_ADDR;
 
-    /* Load the flash config first, including the checksum */
-    memcpy(running_config, config, sizeof(config_t));
+    /* Load the flash config first */
+    state->config = storage->config;
 
-    /* Calculate and update checksum, size without checksum */
-    uint8_t checksum = calc_checksum((uint8_t *)running_config, sizeof(config_t) - sizeof(uint32_t));
+    /* Calculate and update checksum */
+    uint8_t checksum = calc_checksum((uint8_t *) &state->config, sizeof(config_t));
 
     /* We expect a certain byte to start the config header */
-    bool magic_header_fail = (running_config->magic_header != 0xB00B1E5);
+    bool magic_header_fail = (storage->magic_header != CONFIG_MAGIC);
 
     /* We expect the checksum to match */
-    bool checksum_fail = (running_config->checksum != checksum);
+    bool checksum_fail = (storage->checksum != checksum);
 
     /* We expect the config version to match exactly, to avoid erroneous values */
-    bool version_fail = (running_config->version != CURRENT_CONFIG_VERSION);
+    bool version_fail = (state->config.version != CURRENT_CONFIG_VERSION);
 
-    /* On any condition failing, we fall back to default config */
+    /* On any condition failing, we fall back to the user config */
     if (magic_header_fail || checksum_fail || version_fail)
-        memcpy(running_config, &default_config, sizeof(config_t));
+        state->config = user_config;
+
+    /* Set the toggle hotkey from the configuration */
+    hotkeys[0].keys[0] = state->config.hotkey_toggle;
 }
 
 void save_config(device_t *state) {
     uint8_t buf[FLASH_PAGE_SIZE];
-    uint8_t *raw_config = (uint8_t *)&state->config;
+    config_storage_t *storage = (config_storage_t *) buf;
 
-    /* Calculate and update checksum, size without checksum */
-    uint8_t checksum       = calc_checksum(raw_config, sizeof(config_t) - sizeof(uint32_t));
-    state->config.checksum = checksum;
+    storage->magic_header = CONFIG_MAGIC;
+
+    /* Calculate and store checksum */
+    storage->checksum = calc_checksum((const uint8_t *) &state->config, sizeof(config_t));
 
     /* Copy the config to buffer and wipe the old one */
-    memcpy(buf, raw_config, sizeof(config_t));
+    storage->config = state->config;
     wipe_config();
 
     /* Disable interrupts, then write the flash page and re-enable */

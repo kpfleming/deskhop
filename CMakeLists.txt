@@ -35,7 +35,7 @@ target_include_directories(Pico-PIO-USB PRIVATE ${PICO_PIO_USB_DIR})
 
 set(COMMON_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/src/usb_descriptors.c
-        ${CMAKE_CURRENT_LIST_DIR}/src/defaults.c
+        ${CMAKE_CURRENT_LIST_DIR}/src/user_config.c
         ${CMAKE_CURRENT_LIST_DIR}/src/hid_parser.c
         ${CMAKE_CURRENT_LIST_DIR}/src/utils.c
         ${CMAKE_CURRENT_LIST_DIR}/src/handlers.c

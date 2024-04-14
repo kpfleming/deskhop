@@ -1,9 +1,14 @@
-#include "main.h"
+#include "config.h"
+#include "user_config.h"
 
-/* Default configuration */
-const config_t default_config = {
-    .magic_header = 0xB00B1E5,
+/* User configuration */
+const config_t user_config = {
     .version = CURRENT_CONFIG_VERSION,
+    .kbd_led_as_indicator = KBD_LED_AS_INDICATOR,
+    .hotkey_toggle = HOTKEY_TOGGLE,
+    .jump_threshold = JUMP_THRESHOLD,
+    .enable_acceleration = ENABLE_ACCELERATION,
+    .enforce_ports = ENFORCE_PORTS,
     .output[OUTPUT_A] =
         {
             .number = OUTPUT_A,
@@ -21,9 +26,9 @@ const config_t default_config = {
                 .enabled = SCREENSAVER_A_ENABLED,
                 .only_if_inactive = SCREENSAVER_A_ONLY_IF_INACTIVE,
                 .idle_time_us = SCREENSAVER_A_IDLE_TIME_SEC * 1000000,
-                .max_time_us = SCREENSAVER_A_MAX_TIME_SEC * 1000000,                
+                .max_time_us = SCREENSAVER_A_MAX_TIME_SEC * 1000000,
             }
-        },        
+        },
     .output[OUTPUT_B] =
         {
             .number = OUTPUT_B,
@@ -41,7 +46,7 @@ const config_t default_config = {
                 .enabled = SCREENSAVER_B_ENABLED,
                 .only_if_inactive = SCREENSAVER_B_ONLY_IF_INACTIVE,
                 .idle_time_us = SCREENSAVER_B_IDLE_TIME_SEC * 1000000,
-                .max_time_us = SCREENSAVER_B_MAX_TIME_SEC * 1000000,                
+                .max_time_us = SCREENSAVER_B_MAX_TIME_SEC * 1000000,
             }
         },
 };

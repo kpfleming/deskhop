@@ -24,7 +24,7 @@
 hotkey_combo_t hotkeys[] = {
     /* Main keyboard switching hotkey */
     {.modifier       = 0,
-     .keys           = {HOTKEY_TOGGLE},
+     .keys           = {0}, /* will be populated from user_config */
      .key_count      = 1,
      .pass_to_os     = false,
      .action_handler = &output_toggle_hotkey_handler},

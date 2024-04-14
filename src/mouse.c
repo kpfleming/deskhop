@@ -33,7 +33,7 @@ int32_t move_and_keep_on_screen(int position, int offset) {
 
 /* Implement basic mouse acceleration and define your own curve.
    This one is probably sub-optimal, so let me know if you have a better one. */
-int32_t accelerate(int32_t offset) {
+int32_t accelerate(device_t *state, int32_t offset) {
     const struct curve {
         int value;
         float factor;
@@ -48,7 +48,7 @@ int32_t accelerate(int32_t offset) {
         {70, 4.0}, //    -------------------------------------------
     };             //        10    20    30    40    50    60    70
 
-    if (!ENABLE_ACCELERATION)
+    if (!state->config.enable_acceleration)
         return offset;
 
     for (int i = 0; i < 7; i++) {
@@ -69,8 +69,8 @@ void update_mouse_position(device_t *state, mouse_values_t *values) {
         reduce_speed = MOUSE_ZOOM_SCALING_FACTOR;
 
     /* Calculate movement */
-    int offset_x = accelerate(values->move_x) * (current->speed_x >> reduce_speed);
-    int offset_y = accelerate(values->move_y) * (current->speed_y >> reduce_speed);
+    int offset_x = accelerate(state, values->move_x) * (current->speed_x >> reduce_speed);
+    int offset_y = accelerate(state, values->move_y) * (current->speed_y >> reduce_speed);
 
     /* Update movement */
     state->mouse_x = move_and_keep_on_screen(state->mouse_x, offset_x);
@@ -172,8 +172,8 @@ void check_screen_switch(const mouse_values_t *values, device_t *state) {
     int new_x        = state->mouse_x + values->move_x;
     output_t *output = &state->config.output[state->active_output];
 
-    bool jump_left  = new_x < MIN_SCREEN_COORD - JUMP_THRESHOLD;
-    bool jump_right = new_x > MAX_SCREEN_COORD + JUMP_THRESHOLD;
+    bool jump_left  = new_x < MIN_SCREEN_COORD - state->config.jump_threshold;
+    bool jump_right = new_x > MAX_SCREEN_COORD + state->config.jump_threshold;
 
     int direction = jump_left ? LEFT : RIGHT;
 

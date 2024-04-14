@@ -21,7 +21,7 @@
  *
  * https://github.com/hathach/tinyusb/blob/master/src/class/hid/hid.h
  *
- * defined as HID_KEY_<something>
+ * defined as HID_KEY_<something>, and put its value (not name) here.
  *
  * If you do not want to use a key for switching outputs, you may be tempted
  * to select HID_KEY_NONE here; don't do that! That code appears in many HID
@@ -29,10 +29,10 @@
  * a key that is unlikely to ever appear on a keyboard that you will use.
  * HID_KEY_F24 is probably a good choice as keyboards with 24 function keys
  * are rare.
- * 
+ *
  * */
 
-#define HOTKEY_TOGGLE HID_KEY_CAPS_LOCK
+#define HOTKEY_TOGGLE 0x39 /* HID_KEY_CAPS_LOCK */
 
 /**================================================== *
  * ==============  Mouse Speed Factor  ============== *
@@ -44,13 +44,11 @@
  * MOUSE_SPEED_A_FACTOR_Y: [1-128], mouse moves at this speed in Y direction
  *
  * JUMP_THRESHOLD: [0-32768], sets the "force" you need to use to drag the
- * mouse to another screen, 0 meaning no force needed at all, and ~500 some force
+ * mouse to another output, 0 meaning no force needed at all, and ~500 some force
  * needed, ~1000 no accidental jumps, you need to really mean it.
  *
- * This is now configurable per-screen.
- *
  * ENABLE_ACCELERATION: [0-1], disables or enables mouse acceleration.
- * 
+ *
  * */
 
 /* Output A values */

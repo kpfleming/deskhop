@@ -50,7 +50,7 @@ void tud_hid_set_report_cb(uint8_t instance,
     uint8_t leds = buffer[0];
 
     /* If we are using caps lock LED to indicate the chosen output, that has priority */
-    if (KBD_LED_AS_INDICATOR) {
+    if (global_state.config.kbd_led_as_indicator) {
         leds = leds & 0xFD; /* 1111 1101 (Clear Caps Lock bit) */
 
         if (global_state.active_output)
@@ -103,7 +103,7 @@ void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const *desc_re
 
     switch (itf_protocol) {
         case HID_ITF_PROTOCOL_KEYBOARD:
-            if (ENFORCE_PORTS && BOARD_ROLE == PICO_B)
+            if (global_state.config.enforce_ports && BOARD_ROLE == PICO_B)
                 return;
 
             /* Keeping this is required for setting leds from device set_report callback */
@@ -113,7 +113,7 @@ void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const *desc_re
             break;
 
         case HID_ITF_PROTOCOL_MOUSE:
-            if (ENFORCE_PORTS && BOARD_ROLE == PICO_A)
+            if (global_state.config.enforce_ports && BOARD_ROLE == PICO_A)
                 return;
 
             /* Switch to using protocol report instead of boot report, it's more complicated but

@@ -102,7 +102,7 @@ void output_config_hotkey_handler(device_t *state, hid_keyboard_report_t *report
 void screenlock_hotkey_handler(device_t *state, hid_keyboard_report_t *report) {
     hid_keyboard_report_t lock_report = {0}, release_keys = {0};
 
-    for (int out = 0; out < NUM_SCREENS; out++) {
+    for (int out = 0; out < NUM_OUTPUTS; out++) {
         switch (state->config.output[out].os) {
             case WINDOWS:
             case LINUX:
