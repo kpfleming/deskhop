@@ -18,25 +18,6 @@
 #include "main.h"
 
 /**================================================== *
- * ==============  Checksum Functions  ============== *
- * ================================================== */
-
-uint8_t calc_checksum(const uint8_t *data, int length) {
-    uint8_t checksum = 0;
-
-    for (int i = 0; i < length; i++) {
-        checksum ^= data[i];
-    }
-
-    return checksum;
-}
-
-bool verify_checksum(const uart_packet_t *packet) {
-    uint8_t checksum = calc_checksum(packet->data, PACKET_DATA_LENGTH);
-    return checksum == packet->checksum;
-}
-
-/**================================================== *
  * ==============  Watchdog Functions  ============== *
  * ================================================== */
 

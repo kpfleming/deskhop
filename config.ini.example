@@ -1,0 +1,114 @@
+[core]
+# If kbd_led_as_indicator is enabled, the LED in the 'Caps Lock' key
+# will be used indicate which DeskHop output (A or B) is active. If it
+# is not enabled, the connected hosts will have control of the LEDs.
+; kbd_led_as_indicator = no
+
+# The key to be used to switch the active output; default is 'Caps Lock'
+#
+# Keys can be chosen from the list in
+#   https://github.com/hathach/tinyusb/blob/master/src/class/hid/hid.h
+#
+# If you do not want to use a key for switching outputs, you may be
+# tempted to select HID_KEY_NONE here; don't do that! That code
+# appears in many HID messages and the result will be a non-functional
+# keyboard. Instead, choose a key that is unlikely to ever appear on a
+# keyboard that you will use.  HID_KEY_F24 is probably a good choice
+# as keyboards with 24 function keys are rare.
+; hotkey_toggle = 0x39
+
+# Value from 0 to 32768 which sets the "force" you need to use to drag
+# the mouse to another output, 0 meaning no force needed at all, and
+# ~500 some force needed, ~1000 no accidental jumps, you need to
+# really mean it.
+; jump_threshold = 0
+
+# Enables or disables mouse acceleration.
+; enable_acceleration = yes
+
+# Forces the Deskhop to only permit a keyboard on input A and a mouse
+# (or similar pointing device) on input B. If the wrong devices are
+# connected, they are ignored.
+; enforce_ports = no
+
+[output_a]
+# Number of screens connected the computer on this output.
+; screen_count = 1
+
+# Mouse speed factors, range is 1 through 128.
+; speed_x = 16
+; speed_y = 16
+
+# Operating system running on the computer connected to this
+# output. Options are 'linux', 'macos', 'windows', and 'other'.
+; os = linux
+
+# Screen position for this output. Options are 'left', 'right' and
+# 'middle'.
+; position = left
+
+[output_a.border]
+# (needs description)
+; top = 0
+; bottom = 32767
+
+[output_a.screensaver]
+# If the screensaver is enabled, the pointer location on this output
+# will move around the screen (like the Pong game), but not generate
+# any click (or other) events.
+; enabled = no
+
+# The screensaver will only activate on this output when it is the
+# active output.
+; only_if_inactive = no
+
+# The number of seconds that the output must be idle (no keyboard or
+# mouse activity) before the screensaver will be activated, if it is
+# enabled.
+; idle_time_sec = 240
+
+# The maximum time that the screensaver will be active on this output;
+# the 'maximum time' counter will be reset to zero each time the
+# screensaver is deactivated due to activity.
+; max_time_sec = 0
+
+[output_b]
+# Number of screens connected the computer on this output.
+; screen_count = 1
+
+# Mouse speed factors, range is 1 through 128.
+; speed_x = 16
+; speed_y = 16
+
+# Operating system running on the computer connected to this
+# output. Options are 'linux', 'macos', 'windows', and 'other'.
+; os = linux
+
+# Screen position for this output. Options are 'left', 'right' and
+# 'middle'.
+; position = left
+
+[output_b.border]
+# (needs description)
+; top = 0
+; bottom = 32767
+
+[output_b.screensaver]
+# If the screensaver is enabled, the pointer location on this output
+# will move around the screen (like the Pong game), but not generate
+# any click (or other) events.
+; enabled = no
+
+# The screensaver will only activate on this output when it is the
+# active output.
+; only_if_inactive = no
+
+# The number of seconds that the output must be idle (no keyboard or
+# mouse activity) before the screensaver will be activated, if it is
+# enabled.
+; idle_time_sec = 240
+
+# The maximum time that the screensaver will be active on this output;
+# the 'maximum time' counter will be reset to zero each time the
+# screensaver is deactivated due to activity.
+; max_time_sec = 0

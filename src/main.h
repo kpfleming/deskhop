@@ -30,6 +30,7 @@
 #include <tusb.h>
 #include "usb_descriptors.h"
 #include "user_config.h"
+#include "checksum.h"
 #include <hardware/flash.h>
 #include <hardware/sync.h>
 #include <hardware/watchdog.h>
@@ -248,10 +249,6 @@ void send_value(const uint8_t, enum packet_type_e);
 void restore_leds(device_t *);
 void blink_led(device_t *);
 void led_blinking_task(device_t *);
-
-/*********  Checksum  **********/
-uint8_t calc_checksum(const uint8_t *, int);
-bool verify_checksum(const uart_packet_t *);
 
 /*********  Watchdog  **********/
 void kick_watchdog(device_t *);

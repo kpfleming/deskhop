@@ -33,7 +33,7 @@ target_link_libraries(Pico-PIO-USB PRIVATE
 )
 target_include_directories(Pico-PIO-USB PRIVATE ${PICO_PIO_USB_DIR})
 
-set(COMMON_SOURCES
+set(FIRMWARE_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/src/usb_descriptors.c
         ${CMAKE_CURRENT_LIST_DIR}/src/user_config.c
         ${CMAKE_CURRENT_LIST_DIR}/src/hid_parser.c
@@ -50,12 +50,12 @@ set(COMMON_SOURCES
         ${PICO_TINYUSB_PATH}/src/portable/raspberrypi/pio_usb/hcd_pio_usb.c
 )
 
-set(COMMON_INCLUDES
+set(FIRMWARE_INCLUDES
         ${CMAKE_CURRENT_LIST_DIR}/src
         ${PICO_PIO_USB_DIR}/src
 )
 
-set(COMMON_LINK_LIBRARIES
+set(FIRMWARE_LINK_LIBRARIES
   pico_stdlib
   hardware_flash
   hardware_uart
@@ -78,11 +78,11 @@ foreach(board_role RANGE 0 1)
 
   add_executable(${binary})
 
-  target_sources(${binary} PUBLIC ${COMMON_SOURCES})
+  target_sources(${binary} PUBLIC ${FIRMWARE_SOURCES})
   target_compile_definitions(${binary} PRIVATE BOARD_ROLE=${board_role} PIO_USB_USE_TINYUSB=1 PIO_USB_DP_PIN_DEFAULT=14)
 
-  target_include_directories(${binary} PUBLIC ${COMMON_INCLUDES})
-  target_link_libraries(${binary} PUBLIC ${COMMON_LINK_LIBRARIES})
+  target_include_directories(${binary} PUBLIC ${FIRMWARE_INCLUDES})
+  target_link_libraries(${binary} PUBLIC ${FIRMWARE_LINK_LIBRARIES})
 
   pico_enable_stdio_usb(${binary} 0)
   pico_add_extra_outputs(${binary})
@@ -95,3 +95,41 @@ foreach(board_role RANGE 0 1)
   pico_set_linker_script(${binary} ${CMAKE_SOURCE_DIR}/memory_map.ld)
 
 endforeach()
+
+# cfgtool is built as if it was an 'external project', even though it is in the
+# source tree, because it has to be built for the host, not for the Deskhop device
+#
+# this build technique is the same as used in the Pico SDK to build pioasm
+
+include(ExternalProject)
+
+set(CFGTOOL_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/cfgtool)
+set(CFGTOOL_BINARY_DIR ${CMAKE_BINARY_DIR}/cfgtool)
+
+set(CFGTOOLBuild_TARGET CFGTOOLBuild)
+set(CFGTOOL_TARGET CFGTOOL)
+
+if (NOT TARGET ${CFGTOOLBuild_TARGET})
+   ExternalProject_Add(${CFGTOOLBuild_TARGET}
+                       PREFIX cfgtool
+                       SOURCE_DIR ${CFGTOOL_SOURCE_DIR}
+                       BINARY_DIR ${CFGTOOL_BINARY_DIR}
+                       CMAKE_ARGS "-DCMAKE_MAKE_PROGRAM:FILEPATH=${CMAKE_MAKE_PROGRAM}"
+                       BUILD_ALWAYS 1
+                       INSTALL_COMMAND ""
+                      )
+endif()
+
+if (CMAKE_HOST_WIN32)
+    set(CFGTOOL_EXECUTABLE ${CFGTOOL_BINARY_DIR}/cfgtool.exe)
+else()
+    set(CFGTOOL_EXECUTABLE ${CFGTOOL_BINARY_DIR}/cfgtool)
+endif()
+
+if(NOT TARGET ${CFGTOOL_TARGET})
+    add_executable(${CFGTOOL_TARGET} IMPORTED)
+endif()
+
+set_property(TARGET ${CFGTOOL_TARGET} PROPERTY IMPORTED_LOCATION ${CFGTOOL_EXECUTABLE})
+
+add_dependencies(${CFGTOOL_TARGET} ${CFGTOOLBuild_TARGET})

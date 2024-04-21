@@ -21,6 +21,7 @@
 #include <stdint.h>
 
 #define CURRENT_CONFIG_VERSION 5
+
 #define CONFIG_MAGIC 0xB00B1E5
 
 /*********  Screen  **********/
